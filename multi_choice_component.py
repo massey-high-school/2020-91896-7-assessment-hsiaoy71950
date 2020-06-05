@@ -32,10 +32,10 @@ def multi_choice(question, options):
             print("Please select one of the options provided")
 
 
-test_question = "choose a colour"
+test_question = "choose a colour: "
 test_options = ["red", "green", "blue"]
 
 # Tells you the colour that you picked sucks
 
 colour = multi_choice(test_question, test_options)
-print(colour, "sucks")
+print("{} sucks".format(colour).capitalize())

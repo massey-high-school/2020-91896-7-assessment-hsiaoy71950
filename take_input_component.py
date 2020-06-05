@@ -1,5 +1,3 @@
-# This component prints the instructions
-
 # This component prints all the choices given to the user and makes them enter a valid option
 
 
@@ -34,13 +32,9 @@ def multi_choice(question, options):
             print("Please select one of the options provided")
 
 
-test_question = "First time?: "
-test_options = ["yes", "no"]
+test_question = "decrypt or encrypt?: "
+test_options = ["decrypt", "encrypt"]
 
-# Prints instructions if yes, else no print
-
-yes_or_no = multi_choice(test_question, test_options)
-if yes_or_no == "yes":
-    print("This is a program that will let you encrypt or decrypt a message using the Ceasar cipher and a key.")
-else:
-    print("Good luck!")
+decrypt_encrypt = multi_choice(test_question, test_options)
+message = input("please enter a {}ed message".format(decrypt_encrypt))
+print("I would {} but I have no key and I must {}.".format(decrypt_encrypt, decrypt_encrypt))
