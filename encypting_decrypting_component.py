@@ -1,3 +1,6 @@
+import string
+
+
 def number_check():
     number_loop = ""
     while number_loop == "":
@@ -23,9 +26,9 @@ def multi_choice(question, options):
     for x in options:
         numbering += 1
         print("{}.".format(numbering), x)
-    user_input = "".lower()
+    user_input = ""
     while user_input == "":
-        unchecked_input = input(question)
+        unchecked_input = input(question).lower()
 
         # This checks to see if the user entered a number
         # If a number is entered, it is interpreted as the number printed alongside the options above
@@ -46,29 +49,42 @@ def multi_choice(question, options):
             print("Please select one of the options provided")
 
 
-crypt_question = "decrypt or encrypt?: "
-crypt_options = ["decrypt", "encrypt"]
-choice = multi_choice(crypt_question, crypt_options)
-message = input("enter a message to be {}ed.".format(choice))
-key = number_check()
+loop_de_loop = ""
+while loop_de_loop == "":
 
-alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
+    crypt_question = "decrypt or encrypt?: "
+    crypt_options = ["decrypt", "encrypt"]
+    choice = multi_choice(crypt_question, crypt_options)
+    message = input("enter a message to be {}ed.".format(choice)).lower()
 
-if key < 0:
-    remainder = key % -26
-else:
-    remainder = key % 26
+    if message.islower():
 
-if key > 0:
-    key = (-25 + key)
+        key = number_check()
 
-print("a --->", alphabet[alphabet.index("a") + key])
+        alphabet = []
+        for x in string.ascii_lowercase:
+            alphabet.append(x)
 
-string = ""
+        if key < 0:
+            key %= -26
+        else:
+            key %= 26
 
-for x in message:
-    if x in alphabet:
-        string += alphabet[alphabet.index(x) + key]
+        if choice == "decrypt":
+            key = -key
+        if key > 0:
+
+            key += -26
+
+        print("a --->", alphabet[alphabet.index("a") + key])
+
+        string = ""
+
+        for x in message:
+            if x in alphabet:
+                string += alphabet[alphabet.index(x) + key]
+            else:
+                string += x
+        print(string)
     else:
-        string += x
-print(string)
+        print("The message must contain letters!")

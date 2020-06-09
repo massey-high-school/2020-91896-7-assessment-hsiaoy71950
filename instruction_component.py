@@ -11,9 +11,9 @@ def multi_choice(question, options):
     for x in options:
         numbering += 1
         print("{}.".format(numbering), x)
-    user_input = "".lower()
+    user_input = ""
     while user_input == "":
-        unchecked_input = input(question)
+        unchecked_input = input(question).lower()
 
         # This checks to see if the user entered a number
         # If a number is entered, it is interpreted as the number printed alongside the options above
@@ -37,10 +37,13 @@ def multi_choice(question, options):
 test_question = "First time?: "
 test_options = ["yes", "no"]
 
-# Prints instructions if yes, else no print
+loop_de_loop = ""
+while loop_de_loop == "":
 
-yes_or_no = multi_choice(test_question, test_options)
-if yes_or_no == "yes":
-    print("This is a program that will let you encrypt or decrypt a message using the Ceasar cipher and a key.")
-else:
-    print("Good luck!")
+    # Prints instructions if yes, else no print
+
+    yes_or_no = multi_choice(test_question, test_options)
+    if yes_or_no == "yes":
+        print("This is a program that will let you encrypt or decrypt a message using the Caesar cipher and a key.")
+    else:
+        print("Good luck!")

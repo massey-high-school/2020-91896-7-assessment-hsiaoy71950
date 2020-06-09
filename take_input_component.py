@@ -9,9 +9,9 @@ def multi_choice(question, options):
     for x in options:
         numbering += 1
         print("{}.".format(numbering), x)
-    user_input = "".lower()
+    user_input = ""
     while user_input == "":
-        unchecked_input = input(question)
+        unchecked_input = input(question).lower()
 
         # This checks to see if the user entered a number
         # If a number is entered, it is interpreted as the number printed alongside the options above
@@ -34,7 +34,8 @@ def multi_choice(question, options):
 
 test_question = "decrypt or encrypt?: "
 test_options = ["decrypt", "encrypt"]
-
-decrypt_encrypt = multi_choice(test_question, test_options)
-message = input("please enter a {}ed message".format(decrypt_encrypt))
-print("I would {} but I have no key and I must {}.".format(decrypt_encrypt, decrypt_encrypt))
+loop_de_loop = ""
+while loop_de_loop == "":
+    decrypt_encrypt = multi_choice(test_question, test_options)
+    message = input("please enter a {}ed message".format(decrypt_encrypt))
+    print("I would {} but I have no key and I must {}.".format(decrypt_encrypt, decrypt_encrypt))

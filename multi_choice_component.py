@@ -9,9 +9,9 @@ def multi_choice(question, options):
     for x in options:
         numbering += 1
         print("{}.".format(numbering), x)
-    user_input = "".lower()
+    user_input = ""
     while user_input == "":
-        unchecked_input = input(question)
+        unchecked_input = input(question).lower()
 
         # This checks to see if the user entered a number
         # If a number is entered, it is interpreted as the number printed alongside the options above
@@ -35,7 +35,8 @@ def multi_choice(question, options):
 test_question = "choose a colour: "
 test_options = ["red", "green", "blue"]
 
-# Tells you the colour that you picked sucks
+loop_de_loop = ""
+while loop_de_loop == "":
 
-colour = multi_choice(test_question, test_options)
-print("{} sucks".format(colour).capitalize())
+    colour = multi_choice(test_question, test_options)
+    print("input: {}".format(colour.capitalize()))
