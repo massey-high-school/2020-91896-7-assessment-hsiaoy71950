@@ -2,24 +2,26 @@
 
 
 def number_check():
+    error = "That is not a cool number. You probably like decimals."
     number_loop = ""
     while number_loop == "":
-        cool_number_input = input("Pop in a cool number (no decimals allowed!)")
+        try:
+            cool_number_input = input("Pop in a cool number (no decimals allowed!)")
 
-        # isdigit() doesn't allow negative signs and so by stripping all - signs on the left of the number it can be
-        # preserved
+            if float(cool_number_input) % 1 == 0:
 
-        if cool_number_input.lstrip("-").isdigit():
+                cool_number_input = int(cool_number_input)
 
-            # eval used to allow unorthodox inputs like double negatives or equations
+                return cool_number_input
+            else:
+                print(error)
+        except:
+            print(error)
 
-            return int(eval(cool_number_input))
-        else:
-            print("That is not a cool number. You ought to be ashamed of yourself. You probably like decimals.")
 
+loop_de_loop = ""
+while loop_de_loop == "":
 
-number = number_check()
+    number = number_check()
 
-# 72 because 72 is the coolest number and nobody can convince me otherwise
-
-print("Yea {} is a pretty cool number but the number 72 is cooler".format(number))
+    print("Yea {} is a pretty cool number".format(number))
