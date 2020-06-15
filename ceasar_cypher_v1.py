@@ -48,43 +48,54 @@ def multi_choice(question, options):
         if user_input == "":
             print("Please select one of the options provided")
 
+
+yn_question = "Is this your first time using this program?: "
+yn_options = ["yes", "no"]
+
+yes_or_no = multi_choice(yn_question, yn_options)
+if yes_or_no == "yes":
+    print("This is a program that will let you encrypt or decrypt a message using the Caesar cipher and a key.")
+else:
+    print("Good luck!")
+
+
 alphabet_string = string.ascii_lowercase
 alphabet = []
-for x in range(len(alphabet_string)):
-    alphabet.append(alphabet_string[x])
+for character in range(len(alphabet_string)):
+    alphabet.append(alphabet_string[character])
 
-loop_de_loop = ""
-while loop_de_loop == "":
+    loop_whole_program = ""
+    while loop_whole_program == "":
+        crypt_question = "Would you like to encrypt or decrypt?: "
+        crypt_options = ["decrypt", "encrypt"]
+        choice = multi_choice(crypt_question, crypt_options)
+        message = input("enter a message to be {}ed: ".format(choice)).lower()
 
-    crypt_question = "decrypt or encrypt?: "
-    crypt_options = ["decrypt", "encrypt"]
-    choice = multi_choice(crypt_question, crypt_options)
-    message = input("enter a message to be {}ed.".format(choice)).lower()
+        if message.islower():
 
-    if message.islower():
+            key = number_check()
 
-        key = number_check()
-
-        if key < 0:
-            key %= -26
-        else:
-            key %= 26
-
-        if choice == "decrypt":
-            key = -key
-        if key > 0:
-
-            key += -26
-
-        print("a --->", alphabet[alphabet.index("a") + key])
-
-        string = ""
-
-        for x in message:
-            if x in alphabet:
-                string += alphabet[alphabet.index(x) + key]
+            if key < 0:
+                key %= -26
             else:
-                string += x
-        print(string)
-    else:
-        print("The message must contain letters!")
+                key %= 26
+
+            if choice == "decrypt":
+                key = -key
+            if key > 0:
+
+                key += -26
+
+            print("a --->", alphabet[alphabet.index("a") + key])
+
+            string = ""
+
+            for letters in message:
+                if letters in alphabet:
+                    string += alphabet[alphabet.index(letters) + key]
+                else:
+                    string += letters
+            print(string)
+        else:
+            print("The message must contain letters!")
+        loop_whole_program = input("press <enter> to end the program or any button to end it: ")
