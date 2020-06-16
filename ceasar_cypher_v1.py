@@ -49,8 +49,33 @@ def multi_choice(question, options):
             print("Please select one of the options provided")
 
 
+def key_choice():
+    global choice
+    global key
+    choice = multi_choice(crypt_question, crypt_options)
+    key = number_check()
+
+    if key < 0:
+        key %= -26
+    else:
+        key %= 26
+
+    if choice == "decrypt":
+        key = -key
+    if key > 0:
+        key += -26
+
+
+# Declaring options and questions so they they aren't pointlessly redefined
+
 yn_question = "Is this your first time using this program?: "
 yn_options = ["yes", "no"]
+crypt_question = "Would you like to encrypt or decrypt?: "
+crypt_options = ["decrypt", "encrypt"]
+end_question = "What do you want to do now?: "
+
+choice = ""
+key = 0
 
 yes_or_no = multi_choice(yn_question, yn_options)
 if yes_or_no == "yes":
@@ -59,32 +84,22 @@ else:
     print("Good luck!")
 
 
-alphabet_string = string.ascii_lowercase
+alphabet_string = str(string.ascii_lowercase)
 alphabet = []
-for character in range(len(alphabet_string)):
-    alphabet.append(alphabet_string[character])
+for character in alphabet_string:
+    alphabet.append(character)
 
-    loop_whole_program = ""
-    while loop_whole_program == "":
-        crypt_question = "Would you like to encrypt or decrypt?: "
-        crypt_options = ["decrypt", "encrypt"]
-        choice = multi_choice(crypt_question, crypt_options)
+key_choice()
+
+loop_whole_program = ""
+while loop_whole_program == "":
+
+    message_check_loop = ""
+    while message_check_loop == "":
+
         message = input("enter a message to be {}ed: ".format(choice)).lower()
 
         if message.islower():
-
-            key = number_check()
-
-            if key < 0:
-                key %= -26
-            else:
-                key %= 26
-
-            if choice == "decrypt":
-                key = -key
-            if key > 0:
-
-                key += -26
 
             print("a --->", alphabet[alphabet.index("a") + key])
 
@@ -96,6 +111,29 @@ for character in range(len(alphabet_string)):
                 else:
                     string += letters
             print(string)
+            message_check_loop = 1
         else:
             print("The message must contain letters!")
-        loop_whole_program = input("press <enter> to end the program or any button to end it: ")
+
+    # Because my option checker works by checking for the first letters of the option, the end options could
+    # start with the same letters if encrypt is selected (e.g: 2. encrypt again... 3. encrypt/decrypt...)
+    # this would not be good as the user could enter encrypt and it will not be interpreted as option 3 since the
+    # function checks by iterating through the option list and will see 2 as a match first.
+    # I avoided this by changing the option to encrypt/decrypt decrypt is selected and decrypt/encrypt when encrypt is
+    # selected as they will no longer start with the same characters.
+
+    if choice == "decrypt":
+        not_choice = "Encrypt/decrypt"
+    else:
+        not_choice = "Decrypt/encrypt"
+
+    # Must be put down here for .format to function correctly
+
+    end_options = ["End the program", ("{} again with the same key".format(choice)).capitalize(),
+                   "{} with a different key".format(not_choice)]
+
+    end_program_option = multi_choice(end_question, end_options)
+    if end_program_option == end_options[0]:
+        loop_whole_program = 1
+    elif end_program_option == end_options[2]:
+        key_choice()
