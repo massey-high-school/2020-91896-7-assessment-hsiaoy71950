@@ -50,8 +50,8 @@ def multi_choice(question, options):
 
 alphabet_string = string.ascii_lowercase
 alphabet = []
-for x in range(len(alphabet_string)):
-    alphabet.append(alphabet_string[x])
+for character in range(len(alphabet_string)):
+    alphabet.append(alphabet_string[character])
 
 loop_de_loop = ""
 while loop_de_loop == "":
