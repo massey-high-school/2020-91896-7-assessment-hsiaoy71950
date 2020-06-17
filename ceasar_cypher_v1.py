@@ -129,7 +129,7 @@ while loop_whole_program == "":
 
     # Must be put down here for .format to function correctly
 
-    end_options = ["End the program", ("{} again with the same key".format(choice)).capitalize(),
+    end_options = ["Stop the program", ("{} again with the same key".format(choice)).capitalize(),
                    "{} with a different key".format(not_choice)]
 
     end_program_option = multi_choice(end_question, end_options)
