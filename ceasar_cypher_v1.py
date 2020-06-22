@@ -10,10 +10,7 @@ def number_check():
         # preserved
 
         if cool_number_input.lstrip("-").isdigit():
-
-            # eval used to allow unorthodox inputs like double negatives or equations
-
-            return int(eval(cool_number_input))
+            return int(cool_number_input)
         else:
             print("That is not a cool integer. You ought to be ashamed of yourself. You probably like decimals.")
 
