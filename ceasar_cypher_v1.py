@@ -48,6 +48,8 @@ def multi_choice(question, options):
             print(error)
 
 
+# Condenses asking for decrypt/encrypt and the key into one function as this is used multiple times in the main program
+
 def key_choice():
     global choice
     global key
@@ -65,7 +67,7 @@ def key_choice():
         key += -26
 
 
-# Declaring options and questions so they they aren't pointlessly redefined
+# Declaring options and questions before the loop so they they aren't pointlessly redefined
 
 yn_question = "Is this your first time using this program?: "
 yn_options = ["yes", "no"]
@@ -76,12 +78,15 @@ end_question = "What do you want to do now?: "
 choice = ""
 key = 0
 
+# prints instructions if it is the first time the user is using the program
+
 yes_or_no = multi_choice(yn_question, yn_options)
 if yes_or_no == "yes":
     print("This is a program that will let you encrypt or decrypt a message using the Caesar cipher and a key.")
 else:
     print("Good luck!")
 
+# creates a list containing the alphabet to cycle through when encrypting/decrypting later on
 
 alphabet_string = str(string.ascii_lowercase)
 alphabet = []
@@ -96,11 +101,18 @@ while loop_whole_program == "":
     message_check_loop = ""
     while message_check_loop == "":
 
+        # Checks to see if the message entered contains letters so that the encryption/decryption isn't pointless
+
         message = input("enter a message to be {}ed: ".format(choice)).lower()
 
         if message.islower():
 
+            # Prints what the letter "a" will become after encryption or decryption
+
             print("a --->", alphabet[alphabet.index("a") + key])
+
+            # Iterates through every character in the message entered and if the character is a letter, it will be
+            # cycled through the alphabet list to encrypt/decrypt it and appends the character to a string
 
             string = ""
 
