@@ -86,6 +86,7 @@ def key_picker():
             leave_blank_guess = multi_choice("Leaving this blank will print out all "
                                              "possible options from most likely\n"
                                              "to least likely. Are you sure you want to continue?", yn_options)
+            print()
             if leave_blank_guess == "yes":
                 return "guess key"
             else:
