@@ -6,7 +6,8 @@ from collections import Counter
 def number_check():
     number_loop = ""
     while number_loop == "":
-        number_input = input("What key would you like to use? (Please enter a integer): ")
+        print("What key would you like to use?")
+        number_input = input("Please enter an integer (leave this blank if you do not know): ")
         print()
 
         if number_input == "":
@@ -37,7 +38,8 @@ def multi_choice(question, options):
     user_input_loop = ""
     while user_input_loop == "":
         print()
-        unchecked_input = input(question).lower()
+        print(question)
+        unchecked_input = input("Please select one of the options listed above: ").lower()
 
         # This checks to see if the user entered a number
         # If a number is entered, it is interpreted as the number printed alongside the options above
@@ -58,8 +60,8 @@ def multi_choice(question, options):
                 if y.startswith(unchecked_input):
                     return y
             print()
-
-            error_printer(error)
+        print()
+        error_printer(error)
 
 
 # Split key and choice function into two
@@ -83,8 +85,8 @@ def key_picker():
             picked_number = randint(1, 25)
         else:
             leave_blank_guess = multi_choice("Leaving this blank will print out all "
-                                             "possible options from most likely to least "
-                                             "likely. Are you sure you want to continue?", yn_options)
+                                             "possible options from most likely\n"
+                                             " to least likely. Are you sure you want to continue?", yn_options)
             if leave_blank_guess == "yes":
                 return "guess key"
             else:
@@ -126,11 +128,11 @@ def error_printer(error_message):
 
 # Declaring options and questions before the loop so they they aren't pointlessly redefined
 
-yn_question = "Is this your first time using this program?: "
+yn_question = "Is this your first time using this program? "
 yn_options = ["yes", "no"]
-crypt_question = "Would you like to encrypt or decrypt?: "
+crypt_question = "Would you like to encrypt or decrypt? "
 crypt_options = ["encrypt", "decrypt"]
-end_question = "What do you want to do now?: "
+end_question = "What do you want to do now? "
 border = "-" * 72
 key_blank = ""
 
@@ -172,12 +174,16 @@ key = key_picker()
 loop_whole_program = ""
 while loop_whole_program == "":
 
+    message = ""
+
     message_check_loop = ""
     while message_check_loop == "":
 
         # Checks to see if the message entered contains letters so that the encryption/decryption isn't pointless
 
-        message = input("enter a message to be {}ed: ".format(choice)).lower()
+        print("Please enter a message to be {}ed".format(choice))
+        message = input("The message must contain at least one letter: ").lower()
+        print()
 
         if message.islower():
 
@@ -250,12 +256,14 @@ while loop_whole_program == "":
     # first option edited to make intent more clear
     # added option to do the opposite task with same key
 
+    end_option_2 = ("{}/{} with a different key".format(not_choice, choice)).capitalize()
+    end_option_4 = "Use the same key to {} a message".format(not_choice)
+
     if key_blank == "blank":
         end_options = ["Stop the program", ("{}/{} with a different key".format(not_choice, choice)).capitalize()]
     else:
         end_options = ["Stop the program", ("{} another message with the same key".format(choice)).capitalize(),
-                       ("{}/{} with a different key".format(not_choice, choice)).capitalize(),
-                       "Use the same key to {} a message".format(not_choice)]
+                       end_option_2, end_option_4]
 
     end_program_option = multi_choice(end_question, end_options)
     if end_program_option == "Stop the program":
