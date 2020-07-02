@@ -60,8 +60,8 @@ def multi_choice(question, options):
                 if y.startswith(unchecked_input):
                     return y
             print()
-        print()
-        error_printer(error)
+            error_printer(error)
+
 
 
 # Split key and choice function into two
@@ -86,7 +86,7 @@ def key_picker():
         else:
             leave_blank_guess = multi_choice("Leaving this blank will print out all "
                                              "possible options from most likely\n"
-                                             " to least likely. Are you sure you want to continue?", yn_options)
+                                             "to least likely. Are you sure you want to continue?", yn_options)
             if leave_blank_guess == "yes":
                 return "guess key"
             else:
@@ -199,7 +199,16 @@ while loop_whole_program == "":
 
                     frequency_index = alphabet.index(x)
 
-                    common_letter = alphabet.index(Counter(message).most_common(1)[0][0])
+                    common_letter = ""
+                    print(Counter(message))
+                    print(Counter(message).most_common)
+                    print(Counter(message).most_common(1))
+                    print(Counter(message).most_common(1)[0])
+                    print(Counter(message).most_common(1)[0][0])
+
+                    for x in (Counter(message)):
+                        if Counter(message).most_common(1)[x][0] in alphabet and common_letter != "":
+                            common_letter = alphabet.index(Counter(message).most_common(1)[x][0])
 
                     key = frequency_index - common_letter
                     if key > 0:
