@@ -63,7 +63,6 @@ def multi_choice(question, options):
             error_printer(error)
 
 
-
 # Split key and choice function into two
 
 def choose_decrypt_encrypt():
@@ -199,16 +198,11 @@ while loop_whole_program == "":
 
                     frequency_index = alphabet.index(x)
 
-                    common_letter = ""
-                    print(Counter(message))
-                    print(Counter(message).most_common)
-                    print(Counter(message).most_common(1))
-                    print(Counter(message).most_common(1)[0])
-                    print(Counter(message).most_common(1)[0][0])
-
-                    for x in (Counter(message)):
-                        if Counter(message).most_common(1)[x][0] in alphabet and common_letter != "":
-                            common_letter = alphabet.index(Counter(message).most_common(1)[x][0])
+                    common_letter = 0
+                    for common_list_num in range(len(Counter(message).most_common())):
+                        if Counter(message).most_common()[common_list_num][0] in alphabet:
+                            common_letter = alphabet.index(Counter(message).most_common()[common_list_num][0])
+                            break
 
                     key = frequency_index - common_letter
                     if key > 0:
