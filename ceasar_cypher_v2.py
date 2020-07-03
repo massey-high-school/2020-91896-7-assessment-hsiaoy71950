@@ -241,7 +241,8 @@ while loop_whole_program == "":
                 perform_encrypt(message, key)
             message_check_loop = 1
         else:
-            error_printer("!! The message must contain letters !!")
+            error_printer("!! The message must contain at least one letter !!")
+            print()
 
     # Because my option checker works by checking for the first letters of the option, the end options could
     # start with the same letters if encrypt is selected (e.g: 2. encrypt again... 3. encrypt/decrypt...)
